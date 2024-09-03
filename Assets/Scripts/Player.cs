@@ -43,16 +43,16 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)) {
                 JumpWithMomentum();
             }
-            if (Input.GetKeyDown(KeyCode.Alpha1) && !isFlipping) {
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !isFlipping&&!isSliding&&!isBunnyHoping) {
                 StartCoroutine(DoFlip(2f));
             }
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
                 Dash();
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3) && !isSliding) {
+            if (Input.GetKeyDown(KeyCode.Alpha3) && !isSliding&&!isFlipping&&!isBunnyHoping) {
                 StartCoroutine(Slide());
             }
-            if (Input.GetKeyDown(KeyCode.Alpha4) && !isBunnyHoping) {
+            if (Input.GetKeyDown(KeyCode.Alpha4) && !isBunnyHoping&&!isFlipping&&!isSliding) {
                 StartCoroutine(BunnyHop());
             }
         }
@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator BunnyHop() {
         isBunnyHoping = true;
+        transform.rotation = Quaternion.identity;
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = Quaternion.Euler(new Vector3(slideAngle, transform.eulerAngles.y, transform.eulerAngles.z));
         while (transform.rotation != endRotation) {
@@ -90,6 +91,7 @@ public class Player : MonoBehaviour
     }
     private IEnumerator Slide() {
         isSliding = true;
+        transform.rotation = Quaternion.identity;
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = Quaternion.Euler(new Vector3(slideAngle, transform.eulerAngles.y, transform.eulerAngles.z));
         rigid.AddForce(movingVect * dashForce, ForceMode.Impulse);
@@ -107,6 +109,7 @@ public class Player : MonoBehaviour
    
     IEnumerator DoFlip(float duration) {
         isFlipping = true;
+        transform.rotation = Quaternion.identity;
         rigid.AddForce(Vector3.up * forceJump, ForceMode.Impulse);
         float startRotation = transform.eulerAngles.z;
         float endRotation = startRotation + 360.0f;
