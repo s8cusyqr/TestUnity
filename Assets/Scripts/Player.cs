@@ -39,21 +39,22 @@ public class Player : MonoBehaviour
                 rigid.MovePosition(new Vector3(transform.position.x + moveSpeed, transform.position.y, transform.position.z));
                 movingVect = new Vector3(1, 0, 0);
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Space)&&isGrounded) {
-            JumpWithMomentum();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1)&&!isFlipping) {
-            StartCoroutine(DoFlip(2f));
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            Dash();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3)&&!isSliding) {
-            StartCoroutine(Slide());
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && !isBunnyHoping) {
-            StartCoroutine(BunnyHop());
+
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                JumpWithMomentum();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !isFlipping) {
+                StartCoroutine(DoFlip(2f));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2)) {
+                Dash();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3) && !isSliding) {
+                StartCoroutine(Slide());
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4) && !isBunnyHoping) {
+                StartCoroutine(BunnyHop());
+            }
         }
 
     }
